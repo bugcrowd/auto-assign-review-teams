@@ -48,8 +48,9 @@ export async function run() {
     try {
       const membership = await client.teams.getMembership({ team_id: TEAM_ID, username: pull.data.user.login })
       console.log(membership)
-    } catch {
+    } catch (error) {
       console.log('Owner is not part of TimTamTeam')
+      console.log(error)
       return
     }
 
@@ -67,7 +68,7 @@ export async function run() {
     console.log("Request Status:" + teamResponse.status + ", Teams: " + teamResponse?.data?.requested_teams?.map(t => t.slug).join(','))
   } catch (error) {
     core.setFailed(error.message)
-    throw error
+    console.log(error)
   }
 }
 
