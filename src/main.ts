@@ -46,7 +46,7 @@ export async function run() {
 
     // check if the owner is in timtamteam
     try {
-      const membership = client.teams.getMembership({ team_id: TEAM_ID, username: issue.owner })
+      const membership = client.teams.getMembership({ team_id: TEAM_ID, username: pull.data.user.login })
     } catch {
       console.log('Owner is not part of TimTamTeam')
       return
