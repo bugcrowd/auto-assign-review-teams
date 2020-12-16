@@ -54,14 +54,14 @@ export async function run() {
 
     // confirmed owner is part of timtamteam, assign team to it
     console.log("Adding TimTamTeam")
-    const teamResponse = await client.pulls.createReviewRequest(
-      {
-        owner: issue.owner,
-        repo: issue.repo,
-        pull_number: issue.number,
-        team_reviewers: [TEAM_SLUG]
-      }
-    )
+    const payload = {
+      owner: issue.owner,
+      repo: issue.repo,
+      pull_number: issue.number,
+      team_reviewers: [TEAM_SLUG]
+    }
+    console.log(payload)
+    const teamResponse = await client.pulls.createReviewRequest(payload)
 
     console.log("Request Status:" + teamResponse.status + ", Teams: " + teamResponse?.data?.requested_teams?.map(t => t.slug).join(','))
   } catch (error) {
